@@ -1,0 +1,5 @@
+<!--client/pages/today/today.wxml-->
+<import src="../template/task.wxml"/>
+<block wx:for="{{todoTaskList}}" wx:for-item="item" wx:for-index="index" wx:key="key">
+  <template is="todo-task" data="{{item,index}}" />
+</block>
