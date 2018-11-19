@@ -2,3 +2,12 @@
 page{
     background: #F6F6F6
 }
+.weui-navbar__item{
+  color: #999999;
+}
+.task-bar-active{
+ color: #00abff;
+}
+.weui-navbar__slider{
+  background-color: #00abff;
+}

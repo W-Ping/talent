@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/today/today",
     "pages/plan/plan",
     "pages/addCgi/addCgi",
-    "pages/today/today",
     "pages/myself/myself",
     "pages/template/task"
   ],

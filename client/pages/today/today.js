@@ -1,10 +1,15 @@
 // client/pages/today/today.js
+var sliderWidth = 96;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    tabs: ["待办中", "进行中", "已完成"],
+    activeIndex: 0,
+    sliderOffset: 0,
+    sliderLeft: 0,
     todoTaskList: [],
     startX: 0, //开始坐标
     startY: 0
@@ -13,16 +18,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that=this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+        });
+      }
+    });
+     console.log(Math.random())
     for (var i = 1; i < 6; i++) {
-      this.data.todoTaskList.push({
+      that.data.todoTaskList.push({
         id: "ID" + i,
-        level: "一级",
-        content: i + "我的任务",
+        auther:"欧阳林",
+        level: Math.ceil(Math.random() * 3),
+        content: i + "我的任务就是测试这个DEMO是不是可以如果可以就用这个模板来测试",
         isTouchMove: false //默认隐藏删除
       })
     }
-    this.setData({
-      todoTaskList: this.data.todoTaskList
+    that.setData({
+      todoTaskList: that.data.todoTaskList
     })
   },
 
@@ -72,6 +88,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () { },
+  tabClick: function (e) {
+    this.setData({
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id
+    });
+  },
   touchstart: function (e) {
     console.log("touch start....");
     //开始触摸时 重置所有删除
