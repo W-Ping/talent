@@ -1,7 +1,7 @@
 <!--client/pages/today/today.wxml-->
 
 
-
+<import src="../template/task.wxml" />
 <view class="page">
   <view class="page__bd">
     <view class="weui-tab">
@@ -15,12 +15,15 @@
       </view>
       <view class="weui-tab__panel">
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-          <import src="../template/task.wxml" />
           <block wx:for="{{todoTaskList}}" wx:for-item="item" wx:for-index="index" wx:key="key">
             <template is="todo-task" data="{{item,index}}" />
           </block>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">进行中的任务</view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <block wx:for="{{doingTaskList}}" wx:for-item="item" wx:for-index="index" wx:key="key">
+            <template is="doing-task" data="{{item,index}}" />
+          </block>
+        </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 2}}">已完成的任务</view>
       </view>
     </view>

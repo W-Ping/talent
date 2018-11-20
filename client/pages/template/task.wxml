@@ -12,9 +12,23 @@
     </view>
     <view class='posit'>
       <view class='tt-ignore' catchtap="taskignore" data-id="{{item.id}}" data-index="{{index}}">忽略</view>
-      <view class='tt-start'  catchtap="taskstart"  data-id="{{item.id}}" data-index="{{index}}">启动</view>
+      <view class='tt-start' catchtap="taskstart" data-id="{{item.id}}" data-index="{{index}}">启动</view>
     </view>
   </view>
 </template>
-<template name="doing-task"></template>
+<template name="doing-task">
+  <view class='doing-task'>
+    <view class='di-progress'>
+      <text>{{item.progress}}%</text>
+    </view>
+    <view class='di-title'>
+      <view>
+        <text>{{item.content}}</text> </view>
+      <progress percent="{{item.progress}}" active-mode="forwards" stroke-width="10"  active='true' activeColor='#09BB07'/>
+    </view>
+    <view class='di-add' data-index="{{index}}" bindtap='addprogress'>
+      <image style="width:30px;height:40px;background-color: #eeeeee;" mode="widthFix" src='../../images/add.png'></image>
+    </view>
+  </view>
+</template>
 <template name="finish-task"></template>

@@ -11,93 +11,104 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     todoTaskList: [],
+    doingTaskList: [],
     startX: 0, //开始坐标
     startY: 0
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    var that=this;
+  onLoad: function(options) {
+    var that = this;
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
       }
     });
-     console.log(Math.random())
-    for (var i = 1; i < 6; i++) {
+    console.log(Math.random())
+    for (var i = 0; i < 6; i++) {
       that.data.todoTaskList.push({
         id: "ID" + i,
-        auther:"欧阳林",
+        auther: "欧阳林",
         level: Math.ceil(Math.random() * 3),
         content: i + "我的任务就是测试这个DEMO是不是可以如果可以就用这个模板来测试",
         isTouchMove: false //默认隐藏删除
       })
     }
+
+    for (var i = 0; i < 4; i++) {
+      that.data.doingTaskList.push({
+        id: "ID" + i,
+        progress: Math.ceil(Math.random() * 100),
+        level: Math.ceil(Math.random() * 3),
+        content: i + "我的任务就是测试这个DEMO是不是可以如果可以就用这个模板来测试"
+      })
+    }
     that.setData({
-      todoTaskList: that.data.todoTaskList
+      todoTaskList: that.data.todoTaskList,
+      doingTaskList: that.data.doingTaskList,
     })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () { },
-  tabClick: function (e) {
+  onShareAppMessage: function() {},
+  tabClick: function(e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
   },
-  touchstart: function (e) {
+  touchstart: function(e) {
     console.log("touch start....");
     //开始触摸时 重置所有删除
-    this.data.todoTaskList.forEach(function (v, i) {
+    this.data.todoTaskList.forEach(function(v, i) {
       if (v.isTouchMove) //只操作为true的
         v.isTouchMove = false;
     })
@@ -108,7 +119,7 @@ Page({
 
     })
   },
-  touchmove: function (e) {
+  touchmove: function(e) {
     console.log("touch move....");
     var that = this,
       index = e.currentTarget.dataset.index, //当前索引
@@ -121,10 +132,10 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
-    that.data.todoTaskList.forEach(function (v, i) {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
+    that.data.todoTaskList.forEach(function(v, i) {
       v.isTouchMove = false
       //滑动超过30度角 return
       if (Math.abs(angle) > 30) return;
@@ -144,14 +155,14 @@ Page({
       todoTaskList: that.data.todoTaskList
     })
   },
-  bindtouchend: function (e) {
+  bindtouchend: function(e) {
     console.log("touch end....");
   },
-  taskstart: function (e) {
+  taskstart: function(e) {
     console.log("task start ....");
     var index = e.currentTarget.dataset.index; //当前索引
   },
-  taskignore: function (e) {
+  taskignore: function(e) {
     console.log("task ignore ....");
     var index = e.currentTarget.dataset.index; //当前索引
   },
@@ -160,10 +171,43 @@ Page({
    * @param {Object} start 起点坐标
    * @param {Object} end 终点坐标
    */
-  angle: function (start, end) {
+  angle: function(start, end) {
     var _X = end.X - start.X,
       _Y = end.Y - start.Y
     //返回角度 /Math.atan()返回数字的反正切值
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
-  }
+  },
+  addprogress: function(e) {
+    console.log("add progress....");
+    var index = e.currentTarget.dataset.index; //当前索引
+    this.data.doingTaskList.forEach(function(v, i) {
+      if (index == i) {
+        var newProgress = v.progress + 10;
+        if (newProgress >= 100) {
+          newProgress=100;
+          //TODO 确认任务完成,从列表删除，更新任务状态
+          wx.showModal({
+            title: '确定完成',
+            content: '确定已完成当前任务',
+            success(res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+                console.log("当前任务进度2：", v.progress);
+                v.progress = newProgress;
+                console.log("新增务进度2：", v.progress);
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        } else {
+          v.progress = newProgress;
+          //新增进度
+        }
+      }
+    })
+    this.setData({
+      doingTaskList: this.data.doingTaskList
+    })
+  },
 })

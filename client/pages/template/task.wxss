@@ -117,3 +117,38 @@
   justify-content: center;
   color: #fff;
 }
+
+/**************doing-task CSS*****************/
+
+.doing-task {
+  display: flex;
+  width: 98%;
+  margin: 10rpx auto;
+  flex-direction: row;
+  background: #fff;
+  border-radius: 5px;
+  font-size: 14px;
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+  min-height: 120rpx;
+}
+
+.di-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #00abff;
+  width: 15%;
+}
+
+.di-title {
+  width: 70%;
+}
+
+.di-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ccc;
+  width: 15%;
+}
