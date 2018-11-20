@@ -54,18 +54,35 @@
   background: #ccc;
   font-size: 12px;
 }
-.level-1{
-  background: orangered;
+
+.level-1 {
+  background: #c9171e;
 }
-.level-2{
+
+.title-level-1 {
+  background: #e6363ca6;
+  /* background: -webkit-linear-gradient(left, #f8020b , rgb(236, 9, 46)); 
+  background: -o-linear-gradient(right,#f8020b , rgb(236, 9, 46)); 
+  background: -moz-linear-gradient(right, #f8020b , rgb(236, 9, 46)); 
+  background: linear-gradient(to right,#f8020b , rgb(236, 9, 46)); */
+}
+
+.level-2 {
   background: #ed7300;
 }
-.title-level-2{
-  background: #e7760b93;
+
+.title-level-2 {
+  background: #f8a85d93;
 }
-.level-3{
-  background:yellowgreen;
+
+.level-3 {
+  background: #16a951;
 }
+
+.title-level-3 {
+  background: rgb(175, 231, 63);
+}
+
 .posit {
   display: flex;
   flex-direction: row;
