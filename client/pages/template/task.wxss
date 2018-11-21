@@ -130,7 +130,7 @@
   font-size: 14px;
   border-bottom: 1px solid #ccc;
   overflow: hidden;
-  min-height: 120rpx;
+  height: 160rpx;
 }
 
 .di-progress {
@@ -143,6 +143,9 @@
 
 .di-title {
   width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .di-add {

@@ -22,10 +22,12 @@
       <text>{{item.progress}}%</text>
     </view>
     <view class='di-title'>
-      <view>
-        <text>{{item.content}}</text> </view>
-      <progress percent="{{item.progress}}" active-mode="forwards" stroke-width="10"  active='true' activeColor='#09BB07'/>
+      <view style='height:150rpx;'>{{item.content}}</view>
+      <view style='height:10rpx; overflow: hidden;'>
+        <progress percent="{{item.progress}}" active-mode="forwards" stroke-width="20px" active='true' activeColor='#09BB07' />
+      </view>
     </view>
+
     <view class='di-add' data-index="{{index}}" bindtap='addprogress'>
       <image style="width:30px;height:40px;background-color: #eeeeee;" mode="widthFix" src='../../images/add.png'></image>
     </view>
