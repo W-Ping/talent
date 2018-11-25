@@ -1,6 +1,4 @@
 <!--client/pages/today/today.wxml-->
-
-
 <import src="../template/task.wxml" />
 <view class="page">
   <view class="page__bd">
@@ -24,7 +22,11 @@
             <template is="doing-task" data="{{item,index}}" />
           </block>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">已完成的任务</view>
+        <view class="weui-tab__content " hidden="{{activeIndex != 2}}">
+          <block wx:for="{{finishTaskList}}" wx:for-item="item" wx:for-index="index" wx:key="key">
+            <template is="finish-task" data="{{item,index}}" />
+          </block>
+        </view>
       </view>
     </view>
   </view>

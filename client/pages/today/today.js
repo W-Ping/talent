@@ -12,6 +12,7 @@ Page({
     sliderLeft: 0,
     todoTaskList: [],
     doingTaskList: [],
+    finishTaskList: [],
     startX: 0, //开始坐标
     startY: 0
   },
@@ -34,6 +35,7 @@ Page({
         id: "ID" + i,
         auther: "欧阳林",
         level: Math.ceil(Math.random() * 3),
+        status: 0,
         content: i + "我的任务就是测试这个DEMO是不是可以如果可以就用这个模板来测试",
         isTouchMove: false //默认隐藏删除
       })
@@ -44,12 +46,23 @@ Page({
         id: "ID" + i,
         progress: Math.ceil(Math.random() * 100),
         level: Math.ceil(Math.random() * 3),
+        status: 1,
+        content: i + "我的任务就是测试这个DEMO是不是可以如果可以就用这个模板来测试"
+      })
+    }
+    for (var i = 0; i < 4; i++) {
+      that.data.finishTaskList.push({
+        id: "ID" + i,
+        finisher: "欧阳林",
+        quality: "正常", //‘提前’，'正常'；‘超时’；
+        status: 2,
         content: i + "我的任务就是测试这个DEMO是不是可以如果可以就用这个模板来测试"
       })
     }
     that.setData({
       todoTaskList: that.data.todoTaskList,
       doingTaskList: that.data.doingTaskList,
+      finishTaskList: that.data.finishTaskList,
     })
   },
 
@@ -184,7 +197,7 @@ Page({
       if (index == i) {
         var newProgress = v.progress + 10;
         if (newProgress >= 100) {
-          newProgress=100;
+          newProgress = 100;
           //TODO 确认任务完成,从列表删除，更新任务状态
           wx.showModal({
             title: '确定完成',
@@ -210,4 +223,13 @@ Page({
       doingTaskList: this.data.doingTaskList
     })
   },
+  //任务详情
+  taskdetail: function(e) {
+    var status = e.currentTarget.dataset.status;
+    var id = e.currentTarget.dataset.id;
+    console.log("任务ID:"+id+";任务状态:" + status)
+    wx.navigateTo({
+      url: 'today_detail',
+    })
+  }
 })

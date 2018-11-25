@@ -33,4 +33,68 @@
     </view>
   </view>
 </template>
-<template name="finish-task"></template>
+<template name="finish-task">
+  <view class='finish-task' data-id='{{item.id}}' data-status='{{item.status}}' bindtap='taskdetail'>
+    <view class='ft-conent'>
+      <view class="ft-quality">
+        <view class="quality-type">{{item.quality}}</view>
+      </view>
+      <view class='ft-title'>
+        <text>{{item.content}}</text>
+      </view>
+      <view class='ft-finisher'>{{item.finisher}}</view>
+    </view>
+  </view>
+</template>
+<template name="finish-task-detail">
+  <view class='finish-task-detail'>
+    <view class='ftd ftd-conent'>{{conent}}</view>
+    <view class='ftd ftd-level'>
+      <view>
+        <label>优先级别</label>
+      </view>
+      <view>{{level}}</view>
+    </view>
+    <view class='ftd ftd-estimateTime'>
+      <view>
+        <label>预估时间</label>
+      </view>
+      <view class='estimateTime'>
+        <view>
+          <text>{{estimateStartTime}}</text>
+        </view>
+        <view>至</view>
+        <view>
+          <text>{{estimateEndTime}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='ftd ftd-startTime'>
+      <view>
+        <label>开始时间</label>
+      </view>
+      <view>{{startTime}}</view>
+    </view>
+    <view class='ftd ftd-finishTime'>
+      <view>
+        <label>完成时间</label>
+      </view>
+      <view>{{finishTime}}</view>
+    </view>
+    <view class='ftd ftd-auther'>
+      <view>
+        <label>报告人</label>
+      </view>
+      <view>{{auther}}</view>
+    </view>
+    <view class='ftd ftd-finisher'>
+      <view>
+        <label>经办人</label>
+      </view>
+      <view>{{finisher}}</view>
+    </view>
+  </view>
+</template>
+<template name="create-task">
+
+</template>

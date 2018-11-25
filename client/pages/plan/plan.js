@@ -5,25 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    todoTaskList: [],
-    startX: 0, //开始坐标
-    startY: 0
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    for (var i = 1; i < 6; i++) {
-      this.data.todoTaskList.push({
-        id: "ID" + i,
-        level: "一级",
-        content: i + "我的任务",
-        isTouchMove: false //默认隐藏删除
-      })
-    }
-    this.setData({
-      todoTaskList: this.data.todoTaskList
-    })
   },
 
   /**

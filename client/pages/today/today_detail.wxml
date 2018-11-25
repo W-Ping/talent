@@ -1,0 +1,2 @@
+<import src="../template/task.wxml" />
+<template is="finish-task-detail"  data="{{...taskDetail}}" />
