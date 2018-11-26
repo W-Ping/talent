@@ -13,6 +13,7 @@ Page({
     levelArray: ['1级别', '2级别', '3级别'],
     timeIndex: 0,
     timeArray: ['小时', '天', '周'],
+    taskInfo: {}
   },
 
   /**
@@ -33,7 +34,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
   },
 
   /**
@@ -71,13 +71,16 @@ Page({
 
   },
   selectHandler: function(e) {
-    var selectItems=[];
-    selectItems.push({ handerUid: "U0001", handerName:"我自己"})
+    var selectItems = [];
+    selectItems.push({
+      handerUid: "U0001",
+      handerName: "我自己"
+    })
     console.log('选择经办人', e.detail.value)
     for (var i = 0; i < 10; i++) {
       selectItems.push({
-          handerUid:"U00"+(i+2),
-          handerName:"王丽丽"+(i+2)
+        handerUid: "U00" + (i + 2),
+        handerName: "王丽丽" + (i + 2)
       })
     }
     this.setData({
@@ -97,20 +100,25 @@ Page({
       timeIndex: e.detail.value
     })
   },
-  savTaskSubmit:function(e){
+  savTaskSubmit: function(e) {
     var taskInfo = e.detail.value;
     console.log('创建任务信息', taskInfo)
   },
-  closeSelect: function (e) {
+  closeSelect: function(e) {
     console.log("关闭", e);
     this.setData({
       position: "static",
       textareaShow: true,
     })
   },
-  selected: function (e) {
+  selected: function(e) {
     var selectedItems = this.selectable.data.selectedItems;
     var selectedItem = selectedItems[0];
     console.log('选择经办人信息', selectedItem)
+  },
+  inputText: function(e) {
+    var text = this.selectable.data.inputText;
+    console.log("查询文字：", text);
+    //TODO
   },
 })
