@@ -102,17 +102,23 @@ Component({
         console.log("数据格式转换后", selectItems)
       }
       var animation = wx.createAnimation({
-        duration: 2000,
+        duration: 200,
         timingFunction: 'ease-in-out',
-        delay: 1000
+        delay: 0
       })
       this.animation = animation;
-      animation.height('300px').step();
+      animation.height('0').step();
       this.setData({
         isHidden: !this.data.isHidden,
         selectItems: selectItems,
         animation: this.animation.export()
       })
+      setTimeout(function () {
+        animation.height('300px').step()
+        this.setData({
+          animation: animation
+        })
+      }.bind(this), 200)
     },
     _bindinputText: function(e) {
       var value = e.detail.value;

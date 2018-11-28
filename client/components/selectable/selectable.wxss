@@ -75,18 +75,19 @@
 } */
 
 .wx-mask {
+  width: 100%;
+  height: 100%;
   position: fixed;
-  z-index: 1000;
   top: 0;
-  right: 0;
   left: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
 }
 
 .selectable-continer {
   z-index: 3000;
-  /* height: 250px; */
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -94,15 +95,7 @@
   position: fixed;
   width: 100%;
   bottom: 0;
-  /* overflow: hidden; *//* position: fixed;
- 
-  z-index: 2000;
-  
-  background: #ccc;
-  text-align: center;
-  border-radius: 3px;
-  max-height: 300px;
-  overflow: hidden; */
+  overflow: hidden;
 }
 
 .selectable-btn {

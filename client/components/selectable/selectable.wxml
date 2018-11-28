@@ -1,6 +1,6 @@
 <!--components/selectable.wxml-->
 <view class='selectable' hidden='{{isHidden}}'>
-  <view class='wx-mask' catchtap='closeSelect'></view>
+  <view class='wx-mask' catchtouchmove="true" catchtap='closeSelect'></view>
   <view class='selectable-continer' animation="{{animation}}">
     <view style='height:30%;background:#fff;display: flex;flex-direction: column;'>
       <view class='selectable-btn' style='height:45%;'>
