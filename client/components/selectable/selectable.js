@@ -23,6 +23,8 @@ Component({
    * 组件的初始数据
    */
   data: {
+    animation: {},
+    inputText: "",
     isHidden: true,
     multiSelect: false, //false:单选；true:多选
     selectItems: [], //数据
@@ -42,7 +44,14 @@ Component({
       })
       this.triggerEvent("closeSelect");
     },
+<<<<<<< HEAD
     confirmSelect(e){
+=======
+    confirm(e) {
+      this.setData({
+        isHidden: !this.data.isHidden,
+      })
+>>>>>>> a4ff400549292f48d8f07de436e1d1d5dd3f72e7
       var checked = e.detail.value
       var index = e.currentTarget.dataset.index;
       var changed = {}
@@ -94,10 +103,33 @@ Component({
         }
         // console.log("数据格式转换后", selectItems)
       }
+      var animation = wx.createAnimation({
+        duration: 200,
+        timingFunction: 'ease-in-out',
+        delay: 0
+      })
+      this.animation = animation;
+      animation.height('0').step();
       this.setData({
         isHidden: !this.data.isHidden,
-        selectItems: selectItems
+        selectItems: selectItems,
+        animation: this.animation.export()
       })
+      setTimeout(function () {
+        animation.height('300px').step()
+        this.setData({
+          animation: animation
+        })
+      }.bind(this), 200)
+    },
+    _bindinputText: function(e) {
+      var value = e.detail.value;
+      this.setData({
+        inputText: value
+      })
+      this.triggerEvent("inputText", {
+        composed: true
+      });
     },
     _selectedItem: function(e) {
       // console.log(e);

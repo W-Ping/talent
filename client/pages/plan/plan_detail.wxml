@@ -2,7 +2,7 @@
 <form bindsubmit="savTaskSubmit">
   <view class='create-task'>
     <view class='ct-view ct-conent'>
-      <textarea placeholder="计划内容" name="content" auto-height auto-focus maxlength='150'></textarea>
+      <textarea placeholder="计划内容" name="content" value="{{taskInfo[content]}}" auto-height auto-focus maxlength='150'></textarea>
     </view>
     <view class='ct-view ct-level'>
       <view>
@@ -13,7 +13,11 @@
           <view class="ct-level-picker">{{levelArray[levelIndex]}}
           </view>
         </picker>
+<<<<<<< HEAD
         <input hidden name="level" value='{{level}}'></input>
+=======
+        <input hidden name="level" value="{{taskInfo[level]}}"></input>
+>>>>>>> a4ff400549292f48d8f07de436e1d1d5dd3f72e7
       </view>
     </view>
     <view class='ct-view ct-estimateTime'>
@@ -22,14 +26,14 @@
       </view>
       <view class='estimateTime'>
         <view>
-          <input placeholder='预估时间'></input>
+          <input placeholder='预估时间' name="estimateTime" value="{{taskInfo[estimateTime]}}"></input>
         </view>
         <view>
           <picker bindchange="timeChange" value="{{timeIndex}}" range="{{timeArray}}">
             <view class="ct-time-picker">{{timeArray[timeIndex]}}
             </view>
           </picker>
-          <input hidden name="'estimateTime"></input>
+          <input hidden  name="estimateTimeType" value="{{taskInfo[estimateTimeType]}}"></input>
         </view>
       </view>
     </view>
@@ -38,8 +42,13 @@
         <label>经办人</label>
       </view>
       <view>
+<<<<<<< HEAD
         <text class='handlerText' bindtap='selectHandler'>{{hanlderText}}</text>
         <input hidden name="handlerUid" value='{{hanlderUid}}'></input>
+=======
+        <text class='handlerText' bindtap='selectHandler'>选择经办人</text>
+        <input hidden name="handlerUid" value="{{taskInfo[handlerUid]}}"></input>
+>>>>>>> a4ff400549292f48d8f07de436e1d1d5dd3f72e7
       </view>
     </view>
     <view class='ct-view ct-remark'>
@@ -47,7 +56,7 @@
         <label>备注</label>
       </view>
       <view>
-        <textarea class='remark-textarea' name="remark" placeholder="备注说明" auto-height maxlength='150'></textarea>
+        <textarea class='remark-textarea' name="remark" value="{{taskInfo[remark]}}" placeholder="备注说明" auto-height maxlength='150'></textarea>
       </view>
     </view>
     <view class='save-task-btn'>
@@ -55,4 +64,8 @@
     </view>
   </view>
 </form>
+<<<<<<< HEAD
 <selectable id="selectable" name_key="handerName" value_key="handerUid" image_key="linkmanAvatarUrl" selectItems="{{selectItems}}" multiSelect="{{false}}" bind:closeSelect="closeSelect" catch:confirmSelect='confirmSelect'></selectable>
+=======
+<selectable id="selectable" name_key="handerName" value_key="handerUid" image_key="linkmanAvatarUrl  " selectItems="{{selectItems}}" multiSelect="{{false}}" bind:inputText="inputText" bind:closeSelect="closeSelect" catch:selected='selected'></selectable>
+>>>>>>> a4ff400549292f48d8f07de436e1d1d5dd3f72e7
