@@ -4,7 +4,7 @@
   <view class='wx-mask' catchtap='closeSelect'></view>
   <view class='selectable-continer' style='height:250px;'>
       <view class='selectable-btn'style='height:15%;' >
-        <view class='st-confirm' catchtap='confirm'>
+        <view class='st-confirm' catchtap='confirmSelect'>
           <text>确定</text>
         </view>
         <view class='st-cancel' catchtap='closeSelect'>
@@ -19,9 +19,6 @@
       </view>
     <scroll-view scroll-y class='selectable-box' style='height:70%;'>
       <block wx:for="{{selectItems}}" wx:key="{{key}}" wx:index="{{index}}">
-        <!-- <view class='label-text'>
-          <text>{{item.name}}</text>
-        </view> -->
         <view class="selectable-item {{index%2==0?'even':'odd'}}" data-index='{{index}}' catchtap='_selectedItem'>
           <view class="label-icon">
             <view class="icon {{item.checked ? 'checked ': ''}}"></view>

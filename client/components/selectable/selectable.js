@@ -42,10 +42,7 @@ Component({
       })
       this.triggerEvent("closeSelect");
     },
-    confirm(e){
-      this.setData({
-        isHidden: !this.data.isHidden,
-      })
+    confirmSelect(e){
       var checked = e.detail.value
       var index = e.currentTarget.dataset.index;
       var changed = {}
@@ -75,29 +72,27 @@ Component({
         }
       }
       changed.selectedItems = selectedItems;
+      changed.isHidden = !this.data.isHidden;
       this.setData(changed)
-      this.triggerEvent("confirm", {
+      this.triggerEvent("confirmSelect", {
         composed: true
       });
     },
     showSelect(e) {
-      console.log(e);
       var selectItems = this.data.selectItems;
-      console.log("数据格式转换前", selectItems)
+      // console.log("数据格式转换前", selectItems);
       var name_key = this.data.name_key;
       var value_key = this.data.value_key;
       var image_key = this.data.image_key;
       if (selectItems && selectItems.length > 0) {
         //数据格式转换
         for (var i = 0; i < selectItems.length; i++) {
-          // var converItem = {};
           var item = selectItems[i]
           item['name'] = item[name_key];
           item['value'] = item[value_key];
           item['image'] = item[image_key];
-          // selectItems[i] = converItem;
         }
-        console.log("数据格式转换后", selectItems)
+        // console.log("数据格式转换后", selectItems)
       }
       this.setData({
         isHidden: !this.data.isHidden,

@@ -13,6 +13,9 @@ Page({
     levelArray: ['1级别', '2级别', '3级别'],
     timeIndex: 0,
     timeArray: ['小时', '天', '周'],
+    hanlderText:"选择经办人",
+    hanlderUid:"",
+    level:1,
   },
 
   /**
@@ -86,9 +89,10 @@ Page({
     this.selectable.showSelect(e);
   },
   levelChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    console.log('picker发送选择改变，携带值为', e)
     this.setData({
-      levelIndex: e.detail.value
+      levelIndex: e.detail.value,
+      level: e.detail.value
     })
   },
   timeChange: function(e) {
@@ -108,9 +112,13 @@ Page({
       textareaShow: true,
     })
   },
-  selected: function (e) {
+  confirmSelect: function (e) {
     var selectedItems = this.selectable.data.selectedItems;
     var selectedItem = selectedItems[0];
     console.log('选择经办人信息', selectedItem)
+    this.setData({
+      hanlderText: selectedItem.handerName,
+      hanlderUid: selectedItem.handerUid
+    })
   },
 })

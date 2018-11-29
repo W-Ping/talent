@@ -13,7 +13,7 @@
           <view class="ct-level-picker">{{levelArray[levelIndex]}}
           </view>
         </picker>
-        <input hidden name="'level"></input>
+        <input hidden name="level" value='{{level}}'></input>
       </view>
     </view>
     <view class='ct-view ct-estimateTime'>
@@ -38,8 +38,8 @@
         <label>经办人</label>
       </view>
       <view>
-        <text class='handlerText' bindtap='selectHandler'>选择经办人</text>
-        <input hidden name="handlerUid"></input>
+        <text class='handlerText' bindtap='selectHandler'>{{hanlderText}}</text>
+        <input hidden name="handlerUid" value='{{hanlderUid}}'></input>
       </view>
     </view>
     <view class='ct-view ct-remark'>
@@ -55,4 +55,4 @@
     </view>
   </view>
 </form>
-<selectable id="selectable" name_key="handerName" value_key="handerUid" image_key="linkmanAvatarUrl  " selectItems="{{selectItems}}" multiSelect="{{false}}" bind:closeSelect="closeSelect" catch:selected='selected'></selectable>
+<selectable id="selectable" name_key="handerName" value_key="handerUid" image_key="linkmanAvatarUrl" selectItems="{{selectItems}}" multiSelect="{{false}}" bind:closeSelect="closeSelect" catch:confirmSelect='confirmSelect'></selectable>
