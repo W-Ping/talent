@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/myself/myself",
     "pages/today/today",
+    "pages/myself/myself",
     "pages/today/today_detail",
     "pages/plan/plan",
     "pages/addCgi/addCgi",
