@@ -1,2 +1,2 @@
-<import src="../template/task.wxml" />
-<template is="finish-task-detail"  data="{{...taskDetail}}" />
+<import src="../template/plan.wxml" />
+<template is="finish-plan-detail"  data="{{...planDetail}}" />

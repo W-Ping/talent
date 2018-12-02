@@ -59,5 +59,14 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {},
-
+  navigatorToCreate:function(){
+    wx.navigateTo({
+      url: 'plan_edit?opt=add',
+    })
+  },
+  navigatorToEditList: function () {
+    wx.navigateTo({
+      url: 'plan_list',
+    })
+  }
 })

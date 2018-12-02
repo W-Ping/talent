@@ -1,18 +1,10 @@
 <!--components/selectable.wxml-->
 <view class='selectable' hidden='{{isHidden}}'>
-<<<<<<< HEAD
-
-  <view class='wx-mask' catchtap='closeSelect'></view>
-  <view class='selectable-continer' style='height:250px;'>
-      <view class='selectable-btn'style='height:15%;' >
-        <view class='st-confirm' catchtap='confirmSelect'>
-=======
   <view class='wx-mask' catchtouchmove="true" catchtap='closeSelect'></view>
   <view class='selectable-continer' animation="{{animation}}">
     <view style='height:30%;background:#fff;display: flex;flex-direction: column;'>
       <view class='selectable-btn' style='height:45%;'>
-        <view class='st-confirm' catchtap='confirm'>
->>>>>>> a4ff400549292f48d8f07de436e1d1d5dd3f72e7
+        <view class='st-confirm' catchtap='confirmSelect'>
           <text>确定</text>
         </view>
         <view class='st-cancel' catchtap='closeSelect'>
@@ -25,17 +17,10 @@
           <input class="" placeholder="请输入关键字" bindinput='_bindinputText' />
         </view>
       </view>
-<<<<<<< HEAD
-    <scroll-view scroll-y class='selectable-box' style='height:70%;'>
-      <block wx:for="{{selectItems}}" wx:key="{{key}}" wx:index="{{index}}">
-        <view class="selectable-item {{index%2==0?'even':'odd'}}" data-index='{{index}}' catchtap='_selectedItem'>
-          <view class="label-icon">
-            <view class="icon {{item.checked ? 'checked ': ''}}"></view>
-=======
     </view>
     <view style='height:70%;background:#fff;'>
       <scroll-view scroll-y class='selectable-box' style='height:100%;'>
-        <block wx:for="{{selectItems}}" wx:key="{{key}}" wx:index="{{index}}">
+        <block wx:for="{{items}}" wx:key="{{key}}" wx:index="{{index}}">
           <view class="selectable-item {{index%2==0?'even':'odd'}}" data-index='{{index}}' catchtap='_selectedItem'>
             <view class="label-icon">
               <view class="icon {{item.checked ? 'checked ': ''}}"></view>
@@ -46,7 +31,6 @@
             <view class='label-text'>
               <text>{{item.name}}</text>
             </view>
->>>>>>> a4ff400549292f48d8f07de436e1d1d5dd3f72e7
           </view>
         </block>
         <!-- <block wx:if="{{selectItems.length<=0}}">

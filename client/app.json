@@ -1,12 +1,21 @@
 {
   "pages": [
+    "pages/myself/myself",
     "pages/today/today",
     "pages/today/today_detail",
     "pages/plan/plan",
     "pages/addCgi/addCgi",
-    "pages/myself/myself",
-    "pages/template/task",
-    "pages/plan/plan_detail"
+    "pages/template/plan",
+    "pages/plan/plan_list",
+    "pages/plan/plan_edit",
+    "pages/template/statistics",
+    "pages/myself/setting",
+    "pages/myself/setting_edit",
+    "pages/friend/friend",
+    "pages/myself/setting_auth",
+    "pages/overtime/overtime",
+    "pages/search/search",
+    "pages/notepad/notepad"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

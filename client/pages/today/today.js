@@ -1,4 +1,5 @@
 // client/pages/today/today.js
+let commonUtil = require('../../utils/commonUtil.js');
 var sliderWidth = 96;
 Page({
 
@@ -10,9 +11,9 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-    todoTaskList: [],
-    doingTaskList: [],
-    finishTaskList: [],
+    todoPlanList: [],
+    doingPlanList: [],
+    finishPlanList: [],
     startX: 0, //开始坐标
     startY: 0
   },
@@ -29,10 +30,10 @@ Page({
         });
       }
     });
-    console.log(Math.random())
     for (var i = 0; i < 6; i++) {
-      that.data.todoTaskList.push({
+      that.data.todoPlanList.push({
         id: "ID" + i,
+        planNo: "PLAN-" + i,
         auther: "欧阳林",
         level: Math.ceil(Math.random() * 3),
         status: 0,
@@ -42,8 +43,9 @@ Page({
     }
 
     for (var i = 0; i < 4; i++) {
-      that.data.doingTaskList.push({
+      that.data.doingPlanList.push({
         id: "ID" + i,
+        planNo: "PLAN-" + i,
         progress: Math.ceil(Math.random() * 100),
         level: Math.ceil(Math.random() * 3),
         status: 1,
@@ -51,8 +53,9 @@ Page({
       })
     }
     for (var i = 0; i < 4; i++) {
-      that.data.finishTaskList.push({
+      that.data.finishPlanList.push({
         id: "ID" + i,
+        planNo: "PLAN-" + i,
         finisher: "欧阳林",
         quality: "正常", //‘提前’，'正常'；‘超时’；
         status: 2,
@@ -60,9 +63,9 @@ Page({
       })
     }
     that.setData({
-      todoTaskList: that.data.todoTaskList,
-      doingTaskList: that.data.doingTaskList,
-      finishTaskList: that.data.finishTaskList,
+      todoPlanList: that.data.todoPlanList,
+      doingPlanList: that.data.doingPlanList,
+      finishPlanList: that.data.finishPlanList,
     })
   },
 
@@ -118,82 +121,92 @@ Page({
       activeIndex: e.currentTarget.id
     });
   },
-  touchstart: function(e) {
-    console.log("touch start....");
+  todoTouchstart: function(e) {
+    console.log("todo touch start....");
     //开始触摸时 重置所有删除
-    this.data.todoTaskList.forEach(function(v, i) {
-      if (v.isTouchMove) //只操作为true的
-        v.isTouchMove = false;
-    })
+    commonUtil.preTouchMoveBox(this.data.todoPlanList);
     this.setData({
       startX: e.changedTouches[0].clientX,
       startY: e.changedTouches[0].clientY,
-      todoTaskList: this.data.todoTaskList
-
+      todoPlanList: this.data.todoPlanList
     })
   },
-  touchmove: function(e) {
-    console.log("touch move....");
-    var that = this,
-      index = e.currentTarget.dataset.index, //当前索引
-      startX = that.data.startX, //开始X坐标
-      startY = that.data.startY, //开始Y坐标
+  todoTouchmove: function(e) {
+    console.log("todo touch move....");
+    var index = e.currentTarget.dataset.index, //当前索引
+      startX = this.data.startX, //开始X坐标
+      startY = this.data.startY, //开始Y坐标
       touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
-      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
-      //获取滑动角度
-      angle = that.angle({
-        X: startX,
-        Y: startY
-      }, {
-        X: touchMoveX,
-        Y: touchMoveY
-      });
-    that.data.todoTaskList.forEach(function(v, i) {
-      v.isTouchMove = false
-      //滑动超过30度角 return
-      if (Math.abs(angle) > 30) return;
-      if (i == index) {
-        if (touchMoveX > startX) { //右滑
-          v.isTouchMove = false
-        } else { //左滑
-          v.isTouchMove = true
+      touchMoveY = e.changedTouches[0].clientY; //滑动变化坐标
+    commonUtil.touchMoveBox(this.data.todoPlanList, index, startX, startY, touchMoveX, touchMoveY);
+    //更新数据
+    this.setData({
+      todoPlanList: this.data.todoPlanList
+    })
+  },
+  todoTouchend: function (e) {
+    console.log("todo touch end....");
+  },
+   doingTouchstart: function (e) {
+    console.log("doing touch start....");
+    //开始触摸时 重置所有删除
+    commonUtil.preTouchMoveBox(this.data.doingPlanList);
+    this.setData({
+      startX: e.changedTouches[0].clientX,
+      startY: e.changedTouches[0].clientY,
+      doingPlanList: this.data.doingPlanList
+    })
+  },
+  doingTouchmove: function (e) {
+    console.log("doing touch move....");
+    var index = e.currentTarget.dataset.index, //当前索引
+      startX = this.data.startX, //开始X坐标
+      startY = this.data.startY, //开始Y坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
+      touchMoveY = e.changedTouches[0].clientY; //滑动变化坐标
+    commonUtil.touchMoveBox(this.data.doingPlanList, index, startX, startY, touchMoveX, touchMoveY);
+    //更新数据
+    this.setData({
+      doingPlanList: this.data.doingPlanList
+    })
+  },
+  doingTouchend: function(e) {
+    console.log("doing touch end....");
+  },
+  startPlan: function(e) {
+    console.log("plan start ....");
+    var index = e.currentTarget.dataset.index; //当前索引
+    var planNo = e.currentTarget.dataset.planno;
+  },
+  deletePlan: function(e) {
+    console.log("plan start ....");
+    var index = e.currentTarget.dataset.index;
+    var planNo = e.currentTarget.dataset.planno;
+    wx.showModal({
+      title: '确认删除？',
+      content: planNo,
+      success: function(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
         }
       }
     })
-    console.log(that.data.todoTaskList);
-    console.log("touchMoveX:" + touchMoveX + "--touchMoveY:" + touchMoveY);
-    console.log("startX:" + that.data.startX + "--startY:" + that.data.startY);
-    //更新数据
-    that.setData({
-      todoTaskList: that.data.todoTaskList
+  },
+  topPlan: function(e) {
+    console.log("plan top ....");
+    var index = e.currentTarget.dataset.index;
+    var doingPlanList = this.data.doingPlanList;
+    doingPlanList = commonUtil.toArrayTop(doingPlanList, index);
+    this.setData({
+      doingPlanList: doingPlanList
     })
-  },
-  bindtouchend: function(e) {
-    console.log("touch end....");
-  },
-  taskstart: function(e) {
-    console.log("task start ....");
-    var index = e.currentTarget.dataset.index; //当前索引
-  },
-  taskignore: function(e) {
-    console.log("task ignore ....");
-    var index = e.currentTarget.dataset.index; //当前索引
-  },
-  /**
-   * 计算滑动角度
-   * @param {Object} start 起点坐标
-   * @param {Object} end 终点坐标
-   */
-  angle: function(start, end) {
-    var _X = end.X - start.X,
-      _Y = end.Y - start.Y
-    //返回角度 /Math.atan()返回数字的反正切值
-    return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
   addprogress: function(e) {
     console.log("add progress....");
     var index = e.currentTarget.dataset.index; //当前索引
-    this.data.doingTaskList.forEach(function(v, i) {
+    this.data.doingPlanList.forEach(function(v, i) {
       if (index == i) {
         var newProgress = v.progress + 10;
         if (newProgress >= 100) {
@@ -220,14 +233,14 @@ Page({
       }
     })
     this.setData({
-      doingTaskList: this.data.doingTaskList
+      doingPlanList: this.data.doingPlanList
     })
   },
   //任务详情
-  taskdetail: function(e) {
+  planDetail: function(e) {
     var status = e.currentTarget.dataset.status;
     var id = e.currentTarget.dataset.id;
-    console.log("任务ID:"+id+";任务状态:" + status)
+    console.log("任务ID:" + id + ";任务状态:" + status)
     wx.navigateTo({
       url: 'today_detail',
     })

@@ -5,11 +5,13 @@ page {
 }
 
 .plan-continer {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   height: 100%;
+  width: 100%;
+  position: absolute;
 }
 
 .plan-declare {
@@ -21,12 +23,14 @@ page {
   min-height: 200px;
   font-size: 16px;
 }
-.plan-declare label{
+
+.plan-declare label {
   color: yellowgreen;
-  font-size:25px;
-  font-weight:800;
+  font-size: 25px;
+  font-weight: 800;
   padding: 2px;
 }
+
 .plan-link {
   display: flex;
   flex-direction: column;
@@ -34,3 +38,33 @@ page {
   width: 100%;
   /* background: red; */
 }
+
+.plan-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* opacity: 0.5; */
+  height: 50%;
+  width: 100%;
+}
+
+.create {
+  /* background: greenyellow; */
+}
+
+.edit {
+  /* background: blue; */
+}
+
+.circle-btn {
+  text-align: center;
+  background: #fff;
+  height: 80px;
+  width: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  box-shadow: 5px 2px 3px #888888 ;
+}
+

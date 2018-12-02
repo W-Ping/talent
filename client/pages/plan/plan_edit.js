@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    selectItems: [],
+    items: [],
     isAssign: false,
     position: "static",
     textareaShow: true,
@@ -13,20 +13,26 @@ Page({
     levelArray: ['1级别', '2级别', '3级别'],
     timeIndex: 0,
     timeArray: ['小时', '天', '周'],
-<<<<<<< HEAD
-    hanlderText:"选择经办人",
-    hanlderUid:"",
-    level:1,
-=======
     taskInfo: {}
->>>>>>> a4ff400549292f48d8f07de436e1d1d5dd3f72e7
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    var opt = options.opt;
+    var planNo = options.planNo || null;
+    console.log(planNo);
+    var barTitle = null;
+    if (opt == 'add') {
+      barTitle = '新建';
+    } else {
+      barTitle = '编辑';
+      //TODO 查询计划明细
+    }
+    wx.setNavigationBarTitle({
+      title: barTitle,
+    })
   },
 
   /**
@@ -39,8 +45,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -77,28 +82,28 @@ Page({
 
   },
   selectHandler: function(e) {
-    var selectItems = [];
-    selectItems.push({
-      handerUid: "U0001",
-      handerName: "我自己"
+    var items = [];
+    var handlerUid = this.data.taskInfo.handlerUid || '';
+    items.push({
+      handlerUid: "U0001",
+      handlerName: "我自己"
     })
-    console.log('选择经办人', e.detail.value)
     for (var i = 0; i < 10; i++) {
-      selectItems.push({
-        handerUid: "U00" + (i + 2),
-        handerName: "王丽丽" + (i + 2)
+      items.push({
+        handlerUid: "U00" + (i + 2),
+        handlerName: "王丽丽" + (i + 2)
       })
     }
     this.setData({
-      selectItems: selectItems,
+      items: items,
     })
     this.selectable.showSelect(e);
   },
   levelChange: function(e) {
     console.log('picker发送选择改变，携带值为', e)
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      levelIndex: e.detail.value,
-      level: e.detail.value
+      levelIndex: e.detail.value
     })
   },
   timeChange: function(e) {
@@ -118,17 +123,15 @@ Page({
       textareaShow: true,
     })
   },
-<<<<<<< HEAD
-  confirmSelect: function (e) {
-=======
-  selected: function(e) {
->>>>>>> a4ff400549292f48d8f07de436e1d1d5dd3f72e7
+  confirmSelect: function(e) {
     var selectedItems = this.selectable.data.selectedItems;
     var selectedItem = selectedItems[0];
     console.log('选择经办人信息', selectedItem)
+    this.data.taskInfo.handlerUid = selectedItem.handlerUid ? selectedItem.handlerUid : "";
+    this.data.taskInfo.handlerName = selectedItem.handlerName ? selectedItem.handlerName : "";
+    console.log('选择经办人信息', this.data.taskInfo)
     this.setData({
-      hanlderText: selectedItem.handerName,
-      hanlderUid: selectedItem.handerUid
+      taskInfo: this.data.taskInfo
     })
   },
   inputText: function(e) {

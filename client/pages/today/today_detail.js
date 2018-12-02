@@ -13,11 +13,13 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      taskDetail: {
-        level: 1,
+      planDetail: {
+        level: '1级',
         conent: "我的任务就是测试这个DEMO是不是可以如果可以就用这个模板来测试",
         estimateStartTime: "2018年10年10日",
         estimateEndTime: "2018年11年16日",
+        estimateTime: "1",
+        estimateType: "天",
         startTime: "2018年11月10日",
         finishTime: "2018年11月16日",
         auther: "王大力",

@@ -11,8 +11,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    selectItems: Array,
-    selectedItem: Object,
+    items: Array,
     multiSelect: Boolean,
     name_key: String,
     value_key: String,
@@ -27,7 +26,7 @@ Component({
     inputText: "",
     isHidden: true,
     multiSelect: false, //false:单选；true:多选
-    selectItems: [], //数据
+    items: [], //数据
     selectedItems: [], //选中的数据
     name_key: 'name',
     value_key: 'value',
@@ -44,39 +43,32 @@ Component({
       })
       this.triggerEvent("closeSelect");
     },
-<<<<<<< HEAD
-    confirmSelect(e){
-=======
-    confirm(e) {
-      this.setData({
-        isHidden: !this.data.isHidden,
-      })
->>>>>>> a4ff400549292f48d8f07de436e1d1d5dd3f72e7
+    confirmSelect(e) {
       var checked = e.detail.value
       var index = e.currentTarget.dataset.index;
       var changed = {}
-      var selectItems = this.data.selectItems;
+      var items = this.data.items;
       var selectedItems = this.data.selectedItems;
       var multiSelect = this.data.multiSelect
-      for (var i = 0; i < selectItems.length; i++) {
+      for (var i = 0; i < items.length; i++) {
         if (index == i) {
-          var currIndex = selectedItems.indexOf(selectItems[i]);
+          var currIndex = selectedItems.indexOf(items[i]);
           if (currIndex !== -1) {
-            changed['selectItems[' + i + '].checked'] = false;
+            changed['items[' + i + '].checked'] = false;
             selectedItems.splice(currIndex, 1);
           } else {
             if (!multiSelect) { //单选
               selectedItems = [];
-              changed['selectItems[' + i + '].checked'] = true;
-              selectedItems.push(selectItems[i]);
+              changed['items[' + i + '].checked'] = true;
+              selectedItems.push(items[i]);
             } else {
-              changed['selectItems[' + i + '].checked'] = true;
-              selectedItems.push(selectItems[i]);
+              changed['items[' + i + '].checked'] = true;
+              selectedItems.push(items[i]);
             }
           }
         } else {
           if (!multiSelect) {
-            changed['selectItems[' + i + '].checked'] = false;
+            changed['items[' + i + '].checked'] = false;
           }
         }
       }
@@ -88,21 +80,27 @@ Component({
       });
     },
     showSelect(e) {
-      var selectItems = this.data.selectItems;
-      // console.log("数据格式转换前", selectItems);
+      console.log(e);
+      var items = this.data.items;
+      // console.log("数据格式转换前", items)
       var name_key = this.data.name_key;
       var value_key = this.data.value_key;
       var image_key = this.data.image_key;
-      if (selectItems && selectItems.length > 0) {
+      if (items && items.length > 0) {
         //数据格式转换
-        for (var i = 0; i < selectItems.length; i++) {
-          var item = selectItems[i]
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i]
           item['name'] = item[name_key];
           item['value'] = item[value_key];
           item['image'] = item[image_key];
+
         }
         // console.log("数据格式转换后", selectItems)
       }
+      //默认选中第一条
+      items[0]['checked'] = true;
+      this.data.selectedItems.push(items[0]);
+      //加载动画
       var animation = wx.createAnimation({
         duration: 200,
         timingFunction: 'ease-in-out',
@@ -112,10 +110,11 @@ Component({
       animation.height('0').step();
       this.setData({
         isHidden: !this.data.isHidden,
-        selectItems: selectItems,
+        items: items,
+        selectedItems: this.data.selectedItems,
         animation: this.animation.export()
       })
-      setTimeout(function () {
+      setTimeout(function() {
         animation.height('300px').step()
         this.setData({
           animation: animation
@@ -136,28 +135,28 @@ Component({
       var checked = e.detail.value
       var index = e.currentTarget.dataset.index;
       var changed = {}
-      var selectItems = this.data.selectItems;
+      var items = this.data.items;
       var selectedItems = this.data.selectedItems;
       var multiSelect = this.data.multiSelect
-      for (var i = 0; i < selectItems.length; i++) {
+      for (var i = 0; i < items.length; i++) {
         if (index == i) {
-          var currIndex = selectedItems.indexOf(selectItems[i]);
+          var currIndex = selectedItems.indexOf(items[i]);
           if (currIndex !== -1) {
-            changed['selectItems[' + i + '].checked'] = false;
+            changed['items[' + i + '].checked'] = false;
             selectedItems.splice(currIndex, 1);
           } else {
             if (!multiSelect) { //单选
               selectedItems = [];
-              changed['selectItems[' + i + '].checked'] = true;
-              selectedItems.push(selectItems[i]);
+              changed['items[' + i + '].checked'] = true;
+              selectedItems.push(items[i]);
             } else {
-              changed['selectItems[' + i + '].checked'] = true;
-              selectedItems.push(selectItems[i]);
+              changed['items[' + i + '].checked'] = true;
+              selectedItems.push(items[i]);
             }
           }
         } else {
           if (!multiSelect) {
-            changed['selectItems[' + i + '].checked'] = false;
+            changed['items[' + i + '].checked'] = false;
           }
         }
       }
